@@ -128,6 +128,7 @@ public class InAppWebViewClient extends WebViewClient {
     );
 
     channel.invokeMethod("shouldOverrideUrlLoading", navigationAction.toMap(), new MethodChannel.Result() {
+      Log.e(LOG_TAG,"log : "+url));
       @Override
       public void success(Object response) {
         if (response != null) {                                                                                                                                           
@@ -148,7 +149,7 @@ public class InAppWebViewClient extends WebViewClient {
           }
           return;
         }
-        Log.e(LOG_TAG,"log : "+url));
+      
         allowShouldOverrideUrlLoading(webView, url, headers, isForMainFrame);
       }
 
