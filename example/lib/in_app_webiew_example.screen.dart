@@ -12,8 +12,7 @@ import 'main.dart';
 
 class InAppWebViewExampleScreen extends StatefulWidget {
   @override
-  _InAppWebViewExampleScreenState createState() =>
-      new _InAppWebViewExampleScreenState();
+  _InAppWebViewExampleScreenState createState() => new _InAppWebViewExampleScreenState();
 }
 
 class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
@@ -21,9 +20,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
 
   InAppWebViewController? webViewController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
-      crossPlatform: InAppWebViewOptions(
-          useShouldOverrideUrlLoading: true,
-          mediaPlaybackRequiresUserGesture: false),
+      crossPlatform: InAppWebViewOptions(useShouldOverrideUrlLoading: true, mediaPlaybackRequiresUserGesture: false),
       android: AndroidInAppWebViewOptions(
         useHybridComposition: true,
       ),
@@ -63,13 +60,8 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
           print("onHideContextMenu");
         },
         onContextMenuActionItemClicked: (contextMenuItemClicked) async {
-          var id = (Platform.isAndroid)
-              ? contextMenuItemClicked.androidId
-              : contextMenuItemClicked.iosId;
-          print("onContextMenuActionItemClicked: " +
-              id.toString() +
-              " " +
-              contextMenuItemClicked.title);
+          var id = (Platform.isAndroid) ? contextMenuItemClicked.androidId : contextMenuItemClicked.iosId;
+          print("onContextMenuActionItemClicked: " + id.toString() + " " + contextMenuItemClicked.title);
         });
 
     pullToRefreshController = PullToRefreshController(
@@ -80,8 +72,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
         if (Platform.isAndroid) {
           webViewController?.reload();
         } else if (Platform.isIOS) {
-          webViewController?.loadUrl(
-              urlRequest: URLRequest(url: await webViewController?.getUrl()));
+          webViewController?.loadUrl(urlRequest: URLRequest(url: await webViewController!.getUrl()));
         }
       },
     );
@@ -108,7 +99,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
               if (url.scheme.isEmpty) {
                 url = Uri.parse("https://www.google.com/search?q=" + value);
               }
-              webViewController?.loadUrl(urlRequest: URLRequest(url: url));
+              webViewController?.loadUrl(urlRequest: URLRequest(url: url.origin));
             },
           ),
           Expanded(
@@ -117,8 +108,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                 InAppWebView(
                   key: webViewKey,
                   // contextMenu: contextMenu,
-                  initialUrlRequest:
-                      URLRequest(url: Uri.parse("https://github.com/flutter")),
+                  initialUrlRequest: URLRequest(url: "https://github.com/flutter"),
                   // initialFile: "assets/index.html",
                   initialUserScripts: UnmodifiableListView<UserScript>([]),
                   initialOptions: options,
@@ -132,25 +122,13 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                       urlController.text = this.url;
                     });
                   },
-                  androidOnPermissionRequest:
-                      (controller, origin, resources) async {
-                    return PermissionRequestResponse(
-                        resources: resources,
-                        action: PermissionRequestResponseAction.GRANT);
+                  androidOnPermissionRequest: (controller, origin, resources) async {
+                    return PermissionRequestResponse(resources: resources, action: PermissionRequestResponseAction.GRANT);
                   },
-                  shouldOverrideUrlLoading:
-                      (controller, navigationAction) async {
-                    var uri = navigationAction.request.url!;
+                  shouldOverrideUrlLoading: (controller, navigationAction) async {
+                    var uri = navigationAction.request.url;
 
-                    if (![
-                      "http",
-                      "https",
-                      "file",
-                      "chrome",
-                      "data",
-                      "javascript",
-                      "about"
-                    ].contains(uri.scheme)) {
+                    if (!["http", "https", "file", "chrome", "data", "javascript", "about"].contains(url.substring(0, url.indexOf('://')))) {
                       if (await canLaunch(url)) {
                         // Launch the App
                         await launch(
@@ -192,9 +170,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                     print(consoleMessage);
                   },
                 ),
-                progress < 1.0
-                    ? LinearProgressIndicator(value: progress)
-                    : Container(),
+                progress < 1.0 ? LinearProgressIndicator(value: progress) : Container(),
               ],
             ),
           ),

@@ -6,12 +6,10 @@ import 'main.dart';
 
 class HeadlessInAppWebViewExampleScreen extends StatefulWidget {
   @override
-  _HeadlessInAppWebViewExampleScreenState createState() =>
-      new _HeadlessInAppWebViewExampleScreenState();
+  _HeadlessInAppWebViewExampleScreenState createState() => new _HeadlessInAppWebViewExampleScreenState();
 }
 
-class _HeadlessInAppWebViewExampleScreenState
-    extends State<HeadlessInAppWebViewExampleScreen> {
+class _HeadlessInAppWebViewExampleScreenState extends State<HeadlessInAppWebViewExampleScreen> {
   HeadlessInAppWebView? headlessWebView;
   String url = "";
 
@@ -20,7 +18,7 @@ class _HeadlessInAppWebViewExampleScreenState
     super.initState();
 
     headlessWebView = new HeadlessInAppWebView(
-      initialUrlRequest: URLRequest(url: Uri.parse("https://flutter.dev")),
+      initialUrlRequest: URLRequest(url: "https://flutter.dev"),
       initialOptions: InAppWebViewGroupOptions(
         crossPlatform: InAppWebViewOptions(),
       ),
@@ -69,8 +67,7 @@ class _HeadlessInAppWebViewExampleScreenState
             child: Column(children: <Widget>[
           Container(
             padding: EdgeInsets.all(20.0),
-            child: Text(
-                "CURRENT URL\n${(url.length > 50) ? url.substring(0, 50) + "..." : url}"),
+            child: Text("CURRENT URL\n${(url.length > 50) ? url.substring(0, 50) + "..." : url}"),
           ),
           Center(
             child: ElevatedButton(
@@ -84,11 +81,9 @@ class _HeadlessInAppWebViewExampleScreenState
             child: ElevatedButton(
                 onPressed: () async {
                   try {
-                    await headlessWebView?.webViewController.evaluateJavascript(
-                        source: """console.log('Here is the message!');""");
+                    await headlessWebView?.webViewController.evaluateJavascript(source: """console.log('Here is the message!');""");
                   } on MissingPluginException {
-                    print(
-                        "HeadlessInAppWebView is not running. Click on \"Run HeadlessInAppWebView\"!");
+                    print("HeadlessInAppWebView is not running. Click on \"Run HeadlessInAppWebView\"!");
                   }
                 },
                 child: Text("Send console.log message")),
