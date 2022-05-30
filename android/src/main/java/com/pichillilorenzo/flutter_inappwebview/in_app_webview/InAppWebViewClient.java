@@ -148,6 +148,7 @@ public class InAppWebViewClient extends WebViewClient {
           }
           return;
         }
+        Log.e(LOG_TAG,"log : "+url));
         allowShouldOverrideUrlLoading(webView, url, headers, isForMainFrame);
       }
 
