@@ -97,12 +97,12 @@ class InAppWebViewController {
       case "onLoadStart":
         _injectedScriptsFromURL.clear();
         if ((_webview != null && _webview!.onLoadStart != null) || _inAppBrowser != null) {
-          String? url = call.arguments["url"];
-          Uri? uri = url != null ? Uri.parse(url) : null;
+          String url = call.arguments["url"];
+          //   Uri? uri = url != null ? Uri.parse(url) : null;
           if (_webview != null && _webview!.onLoadStart != null)
-            _webview!.onLoadStart!(this, uri);
+            _webview!.onLoadStart!(this, url);
           else
-            _inAppBrowser!.onLoadStart(uri);
+            _inAppBrowser!.onLoadStart(url);
         }
         break;
       case "onLoadStop":
@@ -871,8 +871,8 @@ class InAppWebViewController {
     // try to get /favicon.ico
     try {
       var faviconUrl = webviewUrl.scheme + "://" + webviewUrl.host + "/favicon.ico";
-      var faviconUri = Uri.parse(faviconUrl);
-      var headRequest = await client.headUrl(faviconUri);
+      var faviconUri = faviconUrl;
+      var headRequest = await client.headUrl(Uri.parse(faviconUri));
       var headResponse = await headRequest.close();
       if (headResponse.statusCode == 200) {
         favicons.add(Favicon(url: faviconUri, rel: "shortcut icon"));
@@ -932,10 +932,10 @@ class InAppWebViewController {
       for (String size in sizesSplitted) {
         int width = int.parse(size.split("x")[0]);
         int height = int.parse(size.split("x")[1]);
-        favicons.add(Favicon(url: Uri.parse(urlIcon), rel: rel, width: width, height: height));
+        favicons.add(Favicon(url: urlIcon, rel: rel, width: width, height: height));
       }
     } else {
-      favicons.add(Favicon(url: Uri.parse(urlIcon), rel: rel, width: null, height: null));
+      favicons.add(Favicon(url: urlIcon, rel: rel, width: null, height: null));
     }
 
     return favicons;

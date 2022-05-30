@@ -1630,7 +1630,7 @@ class ClientCertResponse {
 ///Class that represents a favicon of a website. It is used by [InAppWebViewController.getFavicons] method.
 class Favicon {
   ///The url of the favicon image.
-  Uri url;
+  String url;
 
   ///The relationship between the current web page and the favicon image.
   String? rel;

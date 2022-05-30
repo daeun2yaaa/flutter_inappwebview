@@ -9,8 +9,7 @@ import '../in_app_webview_controller.dart';
 class IosOptions {}
 
 ///This class represents all the iOS-only WebView options available.
-class IOSInAppWebViewOptions
-    implements WebViewOptions, BrowserOptions, IosOptions {
+class IOSInAppWebViewOptions implements WebViewOptions, BrowserOptions, IosOptions {
   ///Set to `true` to disable the bouncing of the WebView when the scrolling has reached an edge of the content. The default value is `false`.
   bool disallowOverScroll;
 
@@ -250,8 +249,7 @@ class IOSInAppWebViewOptions
       this.isPagingEnabled = false,
       this.maximumZoomScale = 1.0,
       this.minimumZoomScale = 1.0,
-      this.contentInsetAdjustmentBehavior =
-          IOSUIScrollViewContentInsetAdjustmentBehavior.NEVER,
+      this.contentInsetAdjustmentBehavior = IOSUIScrollViewContentInsetAdjustmentBehavior.NEVER,
       this.isDirectionalLockEnabled = false,
       this.mediaType,
       this.pageZoom = 1.0,
@@ -261,8 +259,7 @@ class IOSInAppWebViewOptions
       this.allowingReadAccessTo,
       this.disableLongPressContextMenuOnLinks = false,
       this.disableInputAccessoryView = false}) {
-    assert(
-        allowingReadAccessTo == null || allowingReadAccessTo!.isScheme("file"));
+    assert(allowingReadAccessTo == null || allowingReadAccessTo!.isScheme("file"));
   }
 
   @override
@@ -277,19 +274,16 @@ class IOSInAppWebViewOptions
       "enableViewportScale": enableViewportScale,
       "suppressesIncrementalRendering": suppressesIncrementalRendering,
       "allowsAirPlayForMediaPlayback": allowsAirPlayForMediaPlayback,
-      "allowsBackForwardNavigationGestures":
-          allowsBackForwardNavigationGestures,
+      "allowsBackForwardNavigationGestures": allowsBackForwardNavigationGestures,
       "allowsLinkPreview": allowsLinkPreview,
       "ignoresViewportScaleLimits": ignoresViewportScaleLimits,
       "allowsInlineMediaPlayback": allowsInlineMediaPlayback,
-      "allowsPictureInPictureMediaPlayback":
-          allowsPictureInPictureMediaPlayback,
+      "allowsPictureInPictureMediaPlayback": allowsPictureInPictureMediaPlayback,
       "isFraudulentWebsiteWarningEnabled": isFraudulentWebsiteWarningEnabled,
       "selectionGranularity": selectionGranularity.toValue(),
       "dataDetectorTypes": dataDetectorTypesList,
       "sharedCookiesEnabled": sharedCookiesEnabled,
-      "automaticallyAdjustsScrollIndicatorInsets":
-          automaticallyAdjustsScrollIndicatorInsets,
+      "automaticallyAdjustsScrollIndicatorInsets": automaticallyAdjustsScrollIndicatorInsets,
       "accessibilityIgnoresInvertColors": accessibilityIgnoresInvertColors,
       "decelerationRate": decelerationRate.toValue(),
       "alwaysBounceVertical": alwaysBounceVertical,
@@ -298,8 +292,7 @@ class IOSInAppWebViewOptions
       "isPagingEnabled": isPagingEnabled,
       "maximumZoomScale": maximumZoomScale,
       "minimumZoomScale": minimumZoomScale,
-      "contentInsetAdjustmentBehavior":
-          contentInsetAdjustmentBehavior.toValue(),
+      "contentInsetAdjustmentBehavior": contentInsetAdjustmentBehavior.toValue(),
       "isDirectionalLockEnabled": isDirectionalLockEnabled,
       "mediaType": mediaType,
       "pageZoom": pageZoom,
@@ -314,11 +307,9 @@ class IOSInAppWebViewOptions
 
   static IOSInAppWebViewOptions fromMap(Map<String, dynamic> map) {
     List<IOSWKDataDetectorTypes> dataDetectorTypes = [];
-    List<String> dataDetectorTypesList =
-        List<String>.from(map["dataDetectorTypes"] ?? []);
+    List<String> dataDetectorTypesList = List<String>.from(map["dataDetectorTypes"] ?? []);
     dataDetectorTypesList.forEach((dataDetectorTypeValue) {
-      var dataDetectorType =
-          IOSWKDataDetectorTypes.fromValue(dataDetectorTypeValue);
+      var dataDetectorType = IOSWKDataDetectorTypes.fromValue(dataDetectorTypeValue);
       if (dataDetectorType != null) {
         dataDetectorTypes.add(dataDetectorType);
       }
@@ -327,50 +318,35 @@ class IOSInAppWebViewOptions
     IOSInAppWebViewOptions options = IOSInAppWebViewOptions();
     options.disallowOverScroll = map["disallowOverScroll"];
     options.enableViewportScale = map["enableViewportScale"];
-    options.suppressesIncrementalRendering =
-        map["suppressesIncrementalRendering"];
-    options.allowsAirPlayForMediaPlayback =
-        map["allowsAirPlayForMediaPlayback"];
-    options.allowsBackForwardNavigationGestures =
-        map["allowsBackForwardNavigationGestures"];
+    options.suppressesIncrementalRendering = map["suppressesIncrementalRendering"];
+    options.allowsAirPlayForMediaPlayback = map["allowsAirPlayForMediaPlayback"];
+    options.allowsBackForwardNavigationGestures = map["allowsBackForwardNavigationGestures"];
     options.allowsLinkPreview = map["allowsLinkPreview"];
     options.ignoresViewportScaleLimits = map["ignoresViewportScaleLimits"];
     options.allowsInlineMediaPlayback = map["allowsInlineMediaPlayback"];
-    options.allowsPictureInPictureMediaPlayback =
-        map["allowsPictureInPictureMediaPlayback"];
-    options.isFraudulentWebsiteWarningEnabled =
-        map["isFraudulentWebsiteWarningEnabled"];
-    options.selectionGranularity =
-        IOSWKSelectionGranularity.fromValue(map["selectionGranularity"])!;
+    options.allowsPictureInPictureMediaPlayback = map["allowsPictureInPictureMediaPlayback"];
+    options.isFraudulentWebsiteWarningEnabled = map["isFraudulentWebsiteWarningEnabled"];
+    options.selectionGranularity = IOSWKSelectionGranularity.fromValue(map["selectionGranularity"])!;
     options.dataDetectorTypes = dataDetectorTypes;
     options.sharedCookiesEnabled = map["sharedCookiesEnabled"];
-    options.automaticallyAdjustsScrollIndicatorInsets =
-        map["automaticallyAdjustsScrollIndicatorInsets"];
-    options.accessibilityIgnoresInvertColors =
-        map["accessibilityIgnoresInvertColors"];
-    options.decelerationRate =
-        IOSUIScrollViewDecelerationRate.fromValue(map["decelerationRate"])!;
+    options.automaticallyAdjustsScrollIndicatorInsets = map["automaticallyAdjustsScrollIndicatorInsets"];
+    options.accessibilityIgnoresInvertColors = map["accessibilityIgnoresInvertColors"];
+    options.decelerationRate = IOSUIScrollViewDecelerationRate.fromValue(map["decelerationRate"])!;
     options.alwaysBounceVertical = map["alwaysBounceVertical"];
     options.alwaysBounceHorizontal = map["alwaysBounceHorizontal"];
     options.scrollsToTop = map["scrollsToTop"];
     options.isPagingEnabled = map["isPagingEnabled"];
     options.maximumZoomScale = map["maximumZoomScale"];
     options.minimumZoomScale = map["minimumZoomScale"];
-    options.contentInsetAdjustmentBehavior =
-        IOSUIScrollViewContentInsetAdjustmentBehavior.fromValue(
-            map["contentInsetAdjustmentBehavior"])!;
+    options.contentInsetAdjustmentBehavior = IOSUIScrollViewContentInsetAdjustmentBehavior.fromValue(map["contentInsetAdjustmentBehavior"])!;
     options.isDirectionalLockEnabled = map["isDirectionalLockEnabled"];
     options.mediaType = map["mediaType"];
     options.pageZoom = map["pageZoom"];
-    options.limitsNavigationsToAppBoundDomains =
-        map["limitsNavigationsToAppBoundDomains"];
+    options.limitsNavigationsToAppBoundDomains = map["limitsNavigationsToAppBoundDomains"];
     options.useOnNavigationResponse = map["useOnNavigationResponse"];
     options.applePayAPIEnabled = map["applePayAPIEnabled"];
-    options.allowingReadAccessTo = map["allowingReadAccessTo"] != null
-        ? Uri.parse(map["allowingReadAccessTo"])
-        : null;
-    options.disableLongPressContextMenuOnLinks =
-        map["disableLongPressContextMenuOnLinks"];
+    options.allowingReadAccessTo = map["allowingReadAccessTo"] != null ? map["allowingReadAccessTo"] : null;
+    options.disableLongPressContextMenuOnLinks = map["disableLongPressContextMenuOnLinks"];
     options.disableInputAccessoryView = map["disableInputAccessoryView"];
     return options;
   }

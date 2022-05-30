@@ -25,7 +25,7 @@ abstract class WebView {
   ///**Supported Platforms/Implementations**:
   ///- Android native WebView ([Official API - WebViewClient.onPageStarted](https://developer.android.com/reference/android/webkit/WebViewClient#onPageStarted(android.webkit.WebView,%20java.lang.String,%20android.graphics.Bitmap)))
   ///- iOS ([Official API - WKNavigationDelegate.webView](https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455621-webview))
-  final void Function(InAppWebViewController controller, Uri? url)? onLoadStart;
+  final void Function(InAppWebViewController controller, String url)? onLoadStart;
 
   ///Event fired when the [WebView] finishes loading an [url].
   ///
@@ -39,8 +39,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onReceivedError(android.webkit.WebView,%20int,%20java.lang.String,%20java.lang.String)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455623-webview
-  final void Function(InAppWebViewController controller, Uri? url, int code,
-      String message)? onLoadError;
+  final void Function(InAppWebViewController controller, Uri? url, int code, String message)? onLoadError;
 
   ///Event fired when the [WebView] main page receives an HTTP error.
   ///
@@ -55,23 +54,19 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onReceivedHttpError(android.webkit.WebView,%20android.webkit.WebResourceRequest,%20android.webkit.WebResourceResponse)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455643-webview
-  final void Function(InAppWebViewController controller, Uri? url,
-      int statusCode, String description)? onLoadHttpError;
+  final void Function(InAppWebViewController controller, Uri? url, int statusCode, String description)? onLoadHttpError;
 
   ///Event fired when the current [progress] of loading a page is changed.
   ///
   ///**Supported Platforms/Implementations**:
   ///- Android native WebView ([Official API - WebChromeClient.onProgressChanged](https://developer.android.com/reference/android/webkit/WebChromeClient#onProgressChanged(android.webkit.WebView,%20int)))
   ///- iOS
-  final void Function(InAppWebViewController controller, int progress)?
-      onProgressChanged;
+  final void Function(InAppWebViewController controller, int progress)? onProgressChanged;
 
   ///Event fired when the [WebView] receives a [ConsoleMessage].
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onConsoleMessage(android.webkit.ConsoleMessage)
-  final void Function(
-          InAppWebViewController controller, ConsoleMessage consoleMessage)?
-      onConsoleMessage;
+  final void Function(InAppWebViewController controller, ConsoleMessage consoleMessage)? onConsoleMessage;
 
   ///Give the host application a chance to take control when a URL is about to be loaded in the current WebView. This event is not called on the initial load of the WebView.
   ///
@@ -89,16 +84,12 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#shouldOverrideUrlLoading(android.webkit.WebView,%20java.lang.String)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455641-webview
-  final Future<NavigationActionPolicy?> Function(
-          InAppWebViewController controller, NavigationAction navigationAction)?
-      shouldOverrideUrlLoading;
+  final Future<NavigationActionPolicy?> Function(InAppWebViewController controller, NavigationAction navigationAction)? shouldOverrideUrlLoading;
 
   ///Event fired when the [WebView] loads a resource.
   ///
   ///**NOTE**: In order to be able to listen this event, you need to set [InAppWebViewOptions.useOnLoadResource] and [InAppWebViewOptions.javaScriptEnabled] options to `true`.
-  final void Function(
-          InAppWebViewController controller, LoadedResource resource)?
-      onLoadResource;
+  final void Function(InAppWebViewController controller, LoadedResource resource)? onLoadResource;
 
   ///Event fired when the [WebView] scrolls.
   ///
@@ -109,13 +100,11 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebView#onScrollChanged(int,%20int,%20int,%20int)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/uikit/uiscrollviewdelegate/1619392-scrollviewdidscroll
-  final void Function(InAppWebViewController controller, int x, int y)?
-      onScrollChanged;
+  final void Function(InAppWebViewController controller, int x, int y)? onScrollChanged;
 
   ///Use [onDownloadStartRequest] instead
   @Deprecated('Use `onDownloadStartRequest` instead')
-  final void Function(InAppWebViewController controller, Uri url)?
-      onDownloadStart;
+  final void Function(InAppWebViewController controller, Uri url)? onDownloadStart;
 
   ///Event fired when [WebView] recognizes a downloadable file.
   ///To download the file, you can use the [flutter_downloader](https://pub.dev/packages/flutter_downloader) plugin.
@@ -127,16 +116,14 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebView#setDownloadListener(android.webkit.DownloadListener)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455643-webview
-  final void Function(InAppWebViewController controller,
-      DownloadStartRequest downloadStartRequest)? onDownloadStartRequest;
+  final void Function(InAppWebViewController controller, DownloadStartRequest downloadStartRequest)? onDownloadStartRequest;
 
   ///Event fired when the [WebView] finds the `custom-scheme` while loading a resource. Here you can handle the url request and return a [CustomSchemeResponse] to load a specific resource encoded to `base64`.
   ///
   ///[url] represents the url of the request.
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wkurlschemehandler
-  final Future<CustomSchemeResponse?> Function(
-      InAppWebViewController controller, Uri url)? onLoadResourceCustomScheme;
+  final Future<CustomSchemeResponse?> Function(InAppWebViewController controller, Uri url)? onLoadResourceCustomScheme;
 
   ///Event fired when the [WebView] requests the host application to create a new window,
   ///for example when trying to open a link with `target="_blank"` or when `window.open()` is called by JavaScript side.
@@ -169,8 +156,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onCreateWindow(android.webkit.WebView,%20boolean,%20boolean,%20android.os.Message)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wkuidelegate/1536907-webview
-  final Future<bool?> Function(InAppWebViewController controller,
-      CreateWindowAction createWindowAction)? onCreateWindow;
+  final Future<bool?> Function(InAppWebViewController controller, CreateWindowAction createWindowAction)? onCreateWindow;
 
   ///Event fired when the host application should close the given WebView and remove it from the view system if necessary.
   ///At this point, WebCore has stopped any loading in this window and has removed any cross-scripting ability in javascript.
@@ -196,9 +182,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onJsAlert(android.webkit.WebView,%20java.lang.String,%20java.lang.String,%20android.webkit.JsResult)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wkuidelegate/1537406-webview
-  final Future<JsAlertResponse?> Function(
-          InAppWebViewController controller, JsAlertRequest jsAlertRequest)?
-      onJsAlert;
+  final Future<JsAlertResponse?> Function(InAppWebViewController controller, JsAlertRequest jsAlertRequest)? onJsAlert;
 
   ///Event fired when javascript calls the `confirm()` method to display a confirm dialog.
   ///If [JsConfirmResponse.handledByClient] is `true`, the webview will assume that the client will handle the dialog.
@@ -208,9 +192,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onJsConfirm(android.webkit.WebView,%20java.lang.String,%20java.lang.String,%20android.webkit.JsResult)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wkuidelegate/1536489-webview
-  final Future<JsConfirmResponse?> Function(
-          InAppWebViewController controller, JsConfirmRequest jsConfirmRequest)?
-      onJsConfirm;
+  final Future<JsConfirmResponse?> Function(InAppWebViewController controller, JsConfirmRequest jsConfirmRequest)? onJsConfirm;
 
   ///Event fired when javascript calls the `prompt()` method to display a prompt dialog.
   ///If [JsPromptResponse.handledByClient] is `true`, the webview will assume that the client will handle the dialog.
@@ -220,9 +202,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onJsPrompt(android.webkit.WebView,%20java.lang.String,%20java.lang.String,%20java.lang.String,%20android.webkit.JsPromptResult)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wkuidelegate/1538086-webview
-  final Future<JsPromptResponse?> Function(
-          InAppWebViewController controller, JsPromptRequest jsPromptRequest)?
-      onJsPrompt;
+  final Future<JsPromptResponse?> Function(InAppWebViewController controller, JsPromptRequest jsPromptRequest)? onJsPrompt;
 
   ///Event fired when the WebView received an HTTP authentication request. The default behavior is to cancel the request.
   ///
@@ -231,8 +211,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onReceivedHttpAuthRequest(android.webkit.WebView,%20android.webkit.HttpAuthHandler,%20java.lang.String,%20java.lang.String)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455638-webview
-  final Future<HttpAuthResponse?> Function(InAppWebViewController controller,
-      HttpAuthenticationChallenge challenge)? onReceivedHttpAuthRequest;
+  final Future<HttpAuthResponse?> Function(InAppWebViewController controller, HttpAuthenticationChallenge challenge)? onReceivedHttpAuthRequest;
 
   ///Event fired when the WebView need to perform server trust authentication (certificate validation).
   ///The host application must return either [ServerTrustAuthResponse] instance with [ServerTrustAuthResponseAction.CANCEL] or [ServerTrustAuthResponseAction.PROCEED].
@@ -242,9 +221,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onReceivedSslError(android.webkit.WebView,%20android.webkit.SslErrorHandler,%20android.net.http.SslError)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455638-webview
-  final Future<ServerTrustAuthResponse?> Function(
-          InAppWebViewController controller, ServerTrustChallenge challenge)?
-      onReceivedServerTrustAuthRequest;
+  final Future<ServerTrustAuthResponse?> Function(InAppWebViewController controller, ServerTrustChallenge challenge)? onReceivedServerTrustAuthRequest;
 
   ///Notify the host application to handle an SSL client certificate request.
   ///Webview stores the response in memory (for the life of the application) if [ClientCertResponseAction.PROCEED] or [ClientCertResponseAction.CANCEL]
@@ -256,9 +233,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onReceivedClientCertRequest(android.webkit.WebView,%20android.webkit.ClientCertRequest)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455638-webview
-  final Future<ClientCertResponse?> Function(
-          InAppWebViewController controller, ClientCertChallenge challenge)?
-      onReceivedClientCertRequest;
+  final Future<ClientCertResponse?> Function(InAppWebViewController controller, ClientCertChallenge challenge)? onReceivedClientCertRequest;
 
   ///Event fired as find-on-page operations progress.
   ///The listener may be notified multiple times while the operation is underway, and the [numberOfMatches] value should not be considered final unless [isDoneCounting] is true.
@@ -272,8 +247,7 @@ abstract class WebView {
   ///**Supported Platforms/Implementations**:
   ///- Android native WebView ([Official API - WebView.FindListener.onFindResultReceived](https://developer.android.com/reference/android/webkit/WebView.FindListener#onFindResultReceived(int,%20int,%20boolean)))
   ///- iOS
-  final void Function(InAppWebViewController controller, int activeMatchOrdinal,
-      int numberOfMatches, bool isDoneCounting)? onFindResultReceived;
+  final void Function(InAppWebViewController controller, int activeMatchOrdinal, int numberOfMatches, bool isDoneCounting)? onFindResultReceived;
 
   ///Event fired when an `XMLHttpRequest` is sent to a server.
   ///It gives the host application a chance to take control over the request before sending it.
@@ -285,9 +259,7 @@ abstract class WebView {
   ///can inject javascript code right after the document element is created but before any other content is loaded, in Android the javascript code
   ///used to intercept ajax requests is loaded as soon as possible so it won't be instantaneous as iOS but just after some milliseconds (< ~100ms).
   ///Inside the `window.addEventListener("flutterInAppWebViewPlatformReady")` event, the ajax requests will be intercept for sure.
-  final Future<AjaxRequest?> Function(
-          InAppWebViewController controller, AjaxRequest ajaxRequest)?
-      shouldInterceptAjaxRequest;
+  final Future<AjaxRequest?> Function(InAppWebViewController controller, AjaxRequest ajaxRequest)? shouldInterceptAjaxRequest;
 
   ///Event fired whenever the `readyState` attribute of an `XMLHttpRequest` changes.
   ///It gives the host application a chance to abort the request.
@@ -299,9 +271,7 @@ abstract class WebView {
   ///can inject javascript code right after the document element is created but before any other content is loaded, in Android the javascript code
   ///used to intercept ajax requests is loaded as soon as possible so it won't be instantaneous as iOS but just after some milliseconds (< ~100ms).
   ///Inside the `window.addEventListener("flutterInAppWebViewPlatformReady")` event, the ajax requests will be intercept for sure.
-  final Future<AjaxRequestAction?> Function(
-          InAppWebViewController controller, AjaxRequest ajaxRequest)?
-      onAjaxReadyStateChange;
+  final Future<AjaxRequestAction?> Function(InAppWebViewController controller, AjaxRequest ajaxRequest)? onAjaxReadyStateChange;
 
   ///Event fired as an `XMLHttpRequest` progress.
   ///It gives the host application a chance to abort the request.
@@ -313,9 +283,7 @@ abstract class WebView {
   ///can inject javascript code right after the document element is created but before any other content is loaded, in Android the javascript code
   ///used to intercept ajax requests is loaded as soon as possible so it won't be instantaneous as iOS but just after some milliseconds (< ~100ms).
   ///Inside the `window.addEventListener("flutterInAppWebViewPlatformReady")` event, the ajax requests will be intercept for sure.
-  final Future<AjaxRequestAction?> Function(
-          InAppWebViewController controller, AjaxRequest ajaxRequest)?
-      onAjaxProgress;
+  final Future<AjaxRequestAction?> Function(InAppWebViewController controller, AjaxRequest ajaxRequest)? onAjaxProgress;
 
   ///Event fired when a request is sent to a server through [Fetch API](https://developer.mozilla.org/it/docs/Web/API/Fetch_API).
   ///It gives the host application a chance to take control over the request before sending it.
@@ -327,9 +295,7 @@ abstract class WebView {
   ///can inject javascript code right after the document element is created but before any other content is loaded, in Android the javascript code
   ///used to intercept fetch requests is loaded as soon as possible so it won't be instantaneous as iOS but just after some milliseconds (< ~100ms).
   ///Inside the `window.addEventListener("flutterInAppWebViewPlatformReady")` event, the fetch requests will be intercept for sure.
-  final Future<FetchRequest?> Function(
-          InAppWebViewController controller, FetchRequest fetchRequest)?
-      shouldInterceptFetchRequest;
+  final Future<FetchRequest?> Function(InAppWebViewController controller, FetchRequest fetchRequest)? shouldInterceptFetchRequest;
 
   ///Event fired when the host application updates its visited links database.
   ///This event is also fired when the navigation state of the [WebView] changes through the usage of
@@ -341,9 +307,7 @@ abstract class WebView {
   ///[androidIsReload] indicates if this url is being reloaded. Available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#doUpdateVisitedHistory(android.webkit.WebView,%20java.lang.String,%20boolean)
-  final void Function(
-          InAppWebViewController controller, Uri? url, bool? androidIsReload)?
-      onUpdateVisitedHistory;
+  final void Function(InAppWebViewController controller, Uri? url, bool? androidIsReload)? onUpdateVisitedHistory;
 
   ///Event fired when `window.print()` is called from JavaScript side.
   ///
@@ -361,8 +325,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/view/View#setOnLongClickListener(android.view.View.OnLongClickListener)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/uikit/uilongpressgesturerecognizer
-  final void Function(InAppWebViewController controller,
-      InAppWebViewHitTestResult hitTestResult)? onLongPressHitTestResult;
+  final void Function(InAppWebViewController controller, InAppWebViewHitTestResult hitTestResult)? onLongPressHitTestResult;
 
   ///Event fired when the current page has entered full screen mode.
   ///
@@ -388,16 +351,14 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onPageCommitVisible(android.webkit.WebView,%20java.lang.String)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455635-webview
-  final void Function(InAppWebViewController controller, Uri? url)?
-      onPageCommitVisible;
+  final void Function(InAppWebViewController controller, Uri? url)? onPageCommitVisible;
 
   ///Event fired when a change in the document title occurred.
   ///
   ///[title] represents the string containing the new title of the document.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onReceivedTitle(android.webkit.WebView,%20java.lang.String)
-  final void Function(InAppWebViewController controller, String? title)?
-      onTitleChanged;
+  final void Function(InAppWebViewController controller, String? title)? onTitleChanged;
 
   ///Event fired to respond to the results of an over-scroll operation.
   ///
@@ -410,8 +371,7 @@ abstract class WebView {
   ///[clampedY] is `true` if [y] was clamped to an over-scroll boundary.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebView#onOverScrolled(int,%20int,%20boolean,%20boolean)
-  final void Function(InAppWebViewController controller, int x, int y,
-      bool clampedX, bool clampedY)? onOverScrolled;
+  final void Function(InAppWebViewController controller, int x, int y, bool clampedX, bool clampedY)? onOverScrolled;
 
   ///Event fired when the zoom scale of the WebView has changed.
   ///
@@ -424,9 +384,7 @@ abstract class WebView {
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onScaleChanged(android.webkit.WebView,%20float,%20float)
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/uikit/uiscrollviewdelegate/1619409-scrollviewdidzoom
-  final void Function(
-          InAppWebViewController controller, double oldScale, double newScale)?
-      onZoomScaleChanged;
+  final void Function(InAppWebViewController controller, double oldScale, double newScale)? onZoomScaleChanged;
 
   ///Event fired when the webview notifies that a loading URL has been flagged by Safe Browsing.
   ///The default behavior is to show an interstitial to the user, with the reporting checkbox visible.
@@ -438,10 +396,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android 27+.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onSafeBrowsingHit(android.webkit.WebView,%20android.webkit.WebResourceRequest,%20int,%20android.webkit.SafeBrowsingResponse)
-  final Future<SafeBrowsingResponse?> Function(
-      InAppWebViewController controller,
-      Uri url,
-      SafeBrowsingThreat? threatType)? androidOnSafeBrowsingHit;
+  final Future<SafeBrowsingResponse?> Function(InAppWebViewController controller, Uri url, SafeBrowsingThreat? threatType)? androidOnSafeBrowsingHit;
 
   ///Event fired when the WebView is requesting permission to access the specified resources and the permission currently isn't granted or denied.
   ///
@@ -452,10 +407,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android 23+.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onPermissionRequest(android.webkit.PermissionRequest)
-  final Future<PermissionRequestResponse?> Function(
-      InAppWebViewController controller,
-      String origin,
-      List<String> resources)? androidOnPermissionRequest;
+  final Future<PermissionRequestResponse?> Function(InAppWebViewController controller, String origin, List<String> resources)? androidOnPermissionRequest;
 
   ///Event that notifies the host application that web content from the specified origin is attempting to use the Geolocation API, but no permission state is currently set for that origin.
   ///Note that for applications targeting Android N and later SDKs (API level > `Build.VERSION_CODES.M`) this method is only called for requests originating from secure origins such as https.
@@ -466,9 +418,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onGeolocationPermissionsShowPrompt(java.lang.String,%20android.webkit.GeolocationPermissions.Callback)
-  final Future<GeolocationPermissionShowPromptResponse?> Function(
-          InAppWebViewController controller, String origin)?
-      androidOnGeolocationPermissionsShowPrompt;
+  final Future<GeolocationPermissionShowPromptResponse?> Function(InAppWebViewController controller, String origin)? androidOnGeolocationPermissionsShowPrompt;
 
   ///Notify the host application that a request for Geolocation permissions, made with a previous call to [androidOnGeolocationPermissionsShowPrompt] has been canceled.
   ///Any related UI should therefore be hidden.
@@ -476,8 +426,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onGeolocationPermissionsHidePrompt()
-  final void Function(InAppWebViewController controller)?
-      androidOnGeolocationPermissionsHidePrompt;
+  final void Function(InAppWebViewController controller)? androidOnGeolocationPermissionsHidePrompt;
 
   ///Notify the host application of a resource request and allow the application to return the data.
   ///If the return value is `null`, the WebView will continue to load the resource as usual.
@@ -496,9 +445,7 @@ abstract class WebView {
   ///**Official Android API**:
   ///- https://developer.android.com/reference/android/webkit/WebViewClient#shouldInterceptRequest(android.webkit.WebView,%20android.webkit.WebResourceRequest)
   ///- https://developer.android.com/reference/android/webkit/WebViewClient#shouldInterceptRequest(android.webkit.WebView,%20java.lang.String)
-  final Future<WebResourceResponse?> Function(
-          InAppWebViewController controller, WebResourceRequest request)?
-      androidShouldInterceptRequest;
+  final Future<WebResourceResponse?> Function(InAppWebViewController controller, WebResourceRequest request)? androidShouldInterceptRequest;
 
   ///Event called when the renderer currently associated with the WebView becomes unresponsive as a result of a long running blocking task such as the execution of JavaScript.
   ///
@@ -518,9 +465,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android 29+.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewRenderProcessClient#onRenderProcessUnresponsive(android.webkit.WebView,%20android.webkit.WebViewRenderProcess)
-  final Future<WebViewRenderProcessAction?> Function(
-          InAppWebViewController controller, Uri? url)?
-      androidOnRenderProcessUnresponsive;
+  final Future<WebViewRenderProcessAction?> Function(InAppWebViewController controller, Uri? url)? androidOnRenderProcessUnresponsive;
 
   ///Event called once when an unresponsive renderer currently associated with the WebView becomes responsive.
   ///
@@ -533,9 +478,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android 29+.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewRenderProcessClient#onRenderProcessResponsive(android.webkit.WebView,%20android.webkit.WebViewRenderProcess)
-  final Future<WebViewRenderProcessAction?> Function(
-          InAppWebViewController controller, Uri? url)?
-      androidOnRenderProcessResponsive;
+  final Future<WebViewRenderProcessAction?> Function(InAppWebViewController controller, Uri? url)? androidOnRenderProcessResponsive;
 
   ///Event fired when the given WebView's render process has exited.
   ///The application's implementation of this callback should only attempt to clean up the WebView.
@@ -546,23 +489,18 @@ abstract class WebView {
   ///**NOTE**: available only on Android 26+.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onRenderProcessGone(android.webkit.WebView,%20android.webkit.RenderProcessGoneDetail)
-  final void Function(
-          InAppWebViewController controller, RenderProcessGoneDetail detail)?
-      androidOnRenderProcessGone;
+  final void Function(InAppWebViewController controller, RenderProcessGoneDetail detail)? androidOnRenderProcessGone;
 
   ///As the host application if the browser should resend data as the requested page was a result of a POST. The default is to not resend the data.
   ///
   ///**NOTE**: available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onFormResubmission(android.webkit.WebView,%20android.os.Message,%20android.os.Message)
-  final Future<FormResubmissionAction?> Function(
-      InAppWebViewController controller, Uri? url)? androidOnFormResubmission;
+  final Future<FormResubmissionAction?> Function(InAppWebViewController controller, Uri? url)? androidOnFormResubmission;
 
   ///Use [onZoomScaleChanged] instead.
   @Deprecated('Use `onZoomScaleChanged` instead')
-  final void Function(
-          InAppWebViewController controller, double oldScale, double newScale)?
-      androidOnScaleChanged;
+  final void Function(InAppWebViewController controller, double oldScale, double newScale)? androidOnScaleChanged;
 
   ///Event fired when there is new favicon for the current page.
   ///
@@ -571,8 +509,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onReceivedIcon(android.webkit.WebView,%20android.graphics.Bitmap)
-  final void Function(InAppWebViewController controller, Uint8List icon)?
-      androidOnReceivedIcon;
+  final void Function(InAppWebViewController controller, Uint8List icon)? androidOnReceivedIcon;
 
   ///Event fired when there is an url for an apple-touch-icon.
   ///
@@ -583,9 +520,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onReceivedTouchIconUrl(android.webkit.WebView,%20java.lang.String,%20boolean)
-  final void Function(
-          InAppWebViewController controller, Uri url, bool precomposed)?
-      androidOnReceivedTouchIconUrl;
+  final void Function(InAppWebViewController controller, Uri url, bool precomposed)? androidOnReceivedTouchIconUrl;
 
   ///Event fired when the client should display a dialog to confirm navigation away from the current page.
   ///This is the result of the `onbeforeunload` javascript event.
@@ -600,9 +535,7 @@ abstract class WebView {
   ///**NOTE**: available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebChromeClient#onJsBeforeUnload(android.webkit.WebView,%20java.lang.String,%20java.lang.String,%20android.webkit.JsResult)
-  final Future<JsBeforeUnloadResponse?> Function(
-      InAppWebViewController controller,
-      JsBeforeUnloadRequest jsBeforeUnloadRequest)? androidOnJsBeforeUnload;
+  final Future<JsBeforeUnloadResponse?> Function(InAppWebViewController controller, JsBeforeUnloadRequest jsBeforeUnloadRequest)? androidOnJsBeforeUnload;
 
   ///Event fired when a request to automatically log in the user has been processed.
   ///
@@ -611,25 +544,21 @@ abstract class WebView {
   ///**NOTE**: available only on Android.
   ///
   ///**Official Android API**: https://developer.android.com/reference/android/webkit/WebViewClient#onReceivedLoginRequest(android.webkit.WebView,%20java.lang.String,%20java.lang.String,%20java.lang.String)
-  final void Function(
-          InAppWebViewController controller, LoginRequest loginRequest)?
-      androidOnReceivedLoginRequest;
+  final void Function(InAppWebViewController controller, LoginRequest loginRequest)? androidOnReceivedLoginRequest;
 
   ///Invoked when the web view's web content process is terminated.
   ///
   ///**NOTE**: available only on iOS.
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455639-webviewwebcontentprocessdidtermi
-  final void Function(InAppWebViewController controller)?
-      iosOnWebContentProcessDidTerminate;
+  final void Function(InAppWebViewController controller)? iosOnWebContentProcessDidTerminate;
 
   ///Called when a web view receives a server redirect.
   ///
   ///**NOTE**: available only on iOS.
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455627-webview
-  final void Function(InAppWebViewController controller)?
-      iosOnDidReceiveServerRedirectForProvisionalNavigation;
+  final void Function(InAppWebViewController controller)? iosOnDidReceiveServerRedirectForProvisionalNavigation;
 
   ///Called when a web view asks for permission to navigate to new content after the response to the navigation request is known.
   ///
@@ -639,9 +568,7 @@ abstract class WebView {
   ///
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/1455643-webview
-  final Future<IOSNavigationResponseAction?> Function(
-      InAppWebViewController controller,
-      IOSWKNavigationResponse navigationResponse)? iosOnNavigationResponse;
+  final Future<IOSNavigationResponseAction?> Function(InAppWebViewController controller, IOSWKNavigationResponse navigationResponse)? iosOnNavigationResponse;
 
   ///Called when a web view asks whether to continue with a connection that uses a deprecated version of TLS (v1.0 and v1.1).
   ///
@@ -650,9 +577,7 @@ abstract class WebView {
   ///**NOTE**: available only on iOS 14.0+.
   ///
   ///**Official iOS API**: https://developer.apple.com/documentation/webkit/wknavigationdelegate/3601237-webview
-  final Future<IOSShouldAllowDeprecatedTLSAction?> Function(
-      InAppWebViewController controller,
-      URLAuthenticationChallenge challenge)? iosShouldAllowDeprecatedTLS;
+  final Future<IOSShouldAllowDeprecatedTLSAction?> Function(InAppWebViewController controller, URLAuthenticationChallenge challenge)? iosShouldAllowDeprecatedTLS;
 
   ///Initial url request that will be loaded.
   ///
@@ -701,8 +626,7 @@ abstract class WebView {
       this.shouldOverrideUrlLoading,
       this.onLoadResource,
       this.onScrollChanged,
-      @Deprecated('Use `onDownloadStartRequest` instead')
-          this.onDownloadStart,
+      @Deprecated('Use `onDownloadStartRequest` instead') this.onDownloadStart,
       this.onDownloadStartRequest,
       this.onLoadResourceCustomScheme,
       this.onCreateWindow,
@@ -738,8 +662,7 @@ abstract class WebView {
       this.androidOnRenderProcessResponsive,
       this.androidOnRenderProcessUnresponsive,
       this.androidOnFormResubmission,
-      @Deprecated('Use `onZoomScaleChanged` instead')
-          this.androidOnScaleChanged,
+      @Deprecated('Use `onZoomScaleChanged` instead') this.androidOnScaleChanged,
       this.androidOnReceivedIcon,
       this.androidOnReceivedTouchIconUrl,
       this.androidOnJsBeforeUnload,
